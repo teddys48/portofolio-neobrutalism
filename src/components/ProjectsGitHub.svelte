@@ -13,7 +13,6 @@
     Filter, 
     ChevronLeft, 
     ChevronRight,
-    Terminal,
     RefreshCw,
     FolderGit2
   } from 'lucide-svelte';
@@ -21,7 +20,6 @@
   let allRepos = $state<GithubRepo[]>(fallbackGithubRepos);
   let isLoading = $state(true);
   let isLive = $state(false);
-  let errorMsg = $state<string | null>(null);
 
   // Search & Filter & Sort state
   let searchQuery = $state('');
@@ -37,7 +35,6 @@
 
   async function fetchGithubRepos() {
     isLoading = true;
-    errorMsg = null;
     try {
       const res = await fetch('https://api.github.com/users/teddys48/repos?sort=updated&per_page=100');
       if (!res.ok) {
@@ -50,9 +47,7 @@
       } else {
         allRepos = fallbackGithubRepos;
       }
-    } catch (err: any) {
-      console.warn('Falling back to curated repo catalog:', err);
-      errorMsg = err?.message || 'Rate limit / Offline';
+    } catch {
       allRepos = fallbackGithubRepos;
       isLive = false;
     } finally {
@@ -92,7 +87,6 @@
       if (sortBy === 'name') {
         return a.name.localeCompare(b.name);
       }
-      // default: updated
       return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
     });
   });
@@ -118,7 +112,6 @@
   function goToPage(page: number) {
     if (page >= 1 && page <= totalPages) {
       currentPage = page;
-      // Smooth scroll to top of project section
       const el = document.getElementById('projects');
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -158,27 +151,27 @@
   <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
     <div class="space-y-2">
       <div class="inline-block bg-[#54E346] text-black font-mono font-bold text-xs uppercase px-3 py-1 border-2 border-black shadow-[2px_2px_0_#000]">
-        // 03. OPEN SOURCE & LABS
+        PROJECT PORTFOLIO
       </div>
       <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-black dark:text-white flex items-center gap-3">
-        <span>PROJECTS BY GITHUB PAGE</span>
+        <span>GITHUB PROJECTS</span>
         <span class="text-[#00F0FF] text-2xl sm:text-4xl">★</span>
       </h2>
       <p class="text-zinc-600 dark:text-zinc-300 font-medium max-w-2xl text-sm sm:text-base">
-        Browse open-source repositories by page, with live sync to GitHub API (<code class="bg-[#FFE600] text-black px-1.5 py-0.5 border border-black font-mono font-bold text-xs">@teddys48</code>), language filters, and instant clone shortcuts.
+        Browse open-source repositories and backend services by page, with language filtering and direct GitHub access.
       </p>
     </div>
 
-    <!-- Live Status Pill / Refresher -->
+    <!-- Status & Refresher -->
     <div class="flex items-center gap-2">
       <div class="inline-flex items-center gap-2 bg-white dark:bg-[#1E1F30] text-black dark:text-white px-3.5 py-2 border-2 border-black dark:border-white shadow-[3px_3px_0_#000] dark:shadow-[3px_3px_0_#FFE600] font-mono text-xs font-bold">
-        <span class="w-2.5 h-2.5 rounded-full {isLive ? 'bg-[#54E346] animate-pulse-fast' : 'bg-[#FF8A00]'}"></span>
-        <span>{isLive ? 'GITHUB API: LIVE SYNC' : 'ARCHIVE REPOSITORIES'}</span>
+        <span class="w-2.5 h-2.5 rounded-full {isLive ? 'bg-[#54E346]' : 'bg-[#FFE600]'}"></span>
+        <span>GITHUB REPOSITORIES</span>
       </div>
       <button 
         onclick={fetchGithubRepos} 
         disabled={isLoading}
-        title="Refresh repositories from GitHub"
+        aria-label="Refresh repositories list"
         class="neo-btn p-2 bg-[#FFE600] text-black cursor-pointer disabled:opacity-50"
       >
         <RefreshCw class="w-4 h-4 {isLoading ? 'animate-spin' : ''}" />
@@ -186,7 +179,7 @@
     </div>
   </div>
 
-  <!-- Neobrutalist Controls Bar: Search, Language Filter, Sorting, Items per page -->
+  <!-- Controls Bar: Search, Language Filter, Sorting, Items per page -->
   <div class="bg-white dark:bg-[#151624] border-3 border-black dark:border-white shadow-[6px_6px_0_#000] dark:shadow-[6px_6px_0_#FFE600] p-4 sm:p-6 mb-8 space-y-4">
     
     <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
@@ -197,7 +190,7 @@
         <input 
           type="text" 
           bind:value={searchQuery}
-          placeholder="Search by repo name, tech, or topic..."
+          placeholder="Search by project name, stack, or topic..."
           class="w-full pl-10 pr-4 py-2.5 bg-[#FFFDF0] dark:bg-[#1C1D2E] text-black dark:text-white border-2 border-black dark:border-zinc-500 font-mono text-xs sm:text-sm focus:outline-none focus:bg-[#FFE600] focus:text-black dark:focus:bg-[#FFE600] dark:focus:text-black transition-colors"
         />
         {#if searchQuery}
@@ -216,9 +209,9 @@
           bind:value={sortBy}
           class="w-full py-2.5 px-3 bg-[#FFFDF0] dark:bg-[#1C1D2E] text-black dark:text-white border-2 border-black dark:border-zinc-500 font-mono text-xs sm:text-sm font-bold focus:outline-none cursor-pointer"
         >
-          <option value="updated">SORT: RECENTLY UPDATED</option>
-          <option value="stars">SORT: MOST STARS</option>
-          <option value="name">SORT: ALPHABETICAL (A-Z)</option>
+          <option value="updated">RECENTLY UPDATED</option>
+          <option value="stars">MOST STARS</option>
+          <option value="name">ALPHABETICAL (A-Z)</option>
         </select>
       </div>
 
@@ -228,9 +221,9 @@
           bind:value={pageSize}
           class="w-full py-2.5 px-3 bg-[#FFFDF0] dark:bg-[#1C1D2E] text-black dark:text-white border-2 border-black dark:border-zinc-500 font-mono text-xs sm:text-sm font-bold focus:outline-none cursor-pointer"
         >
-          <option value={6}>PAGE SIZE: 6 REPOS</option>
-          <option value={9}>PAGE SIZE: 9 REPOS</option>
-          <option value={12}>PAGE SIZE: 12 REPOS</option>
+          <option value={6}>6 REPOSITORIES PER PAGE</option>
+          <option value={9}>9 REPOSITORIES PER PAGE</option>
+          <option value={12}>12 REPOSITORIES PER PAGE</option>
         </select>
       </div>
 
@@ -239,14 +232,14 @@
     <!-- Language Filter Pills -->
     <div class="flex flex-wrap items-center gap-2 pt-2 border-t-2 border-black/10 dark:border-white/10">
       <span class="font-mono text-xs font-bold text-zinc-500 dark:text-zinc-400 mr-2 flex items-center gap-1">
-        <Filter class="w-3.5 h-3.5" /> STACK:
+        <Filter class="w-3.5 h-3.5" /> FILTER:
       </span>
       {#each ['ALL', 'Go', 'TypeScript/JS', 'PHP', 'Rust'] as lang}
         <button 
           onclick={() => selectedLanguage = lang}
           class="font-mono font-bold text-xs px-3 py-1.5 border-2 border-black transition-all cursor-pointer {selectedLanguage === lang ? 'bg-[#FFE600] text-black shadow-[3px_3px_0_#000] -translate-y-0.5 font-black' : 'bg-white dark:bg-[#1E1F30] text-black dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800'}"
         >
-          {lang === 'ALL' ? 'ALL REPOSITORIES' : lang.toUpperCase()}
+          {lang === 'ALL' ? 'ALL' : lang}
         </button>
       {/each}
     </div>
@@ -260,7 +253,7 @@
     </div>
     
     <div class="flex items-center gap-2">
-      <span class="bg-[#00F0FF] text-black px-2 py-0.5 border border-black shadow-[2px_2px_0_#000]">
+      <span class="bg-[#00F0FF] text-black px-2.5 py-0.5 border border-black shadow-[2px_2px_0_#000]">
         PAGE {currentPage} OF {totalPages}
       </span>
     </div>
@@ -295,7 +288,7 @@
 
             <!-- Description -->
             <p class="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 font-medium leading-relaxed min-h-[48px] line-clamp-3">
-              {repo.description || "Production-tested software implementation with Docker and microservice patterns."}
+              {repo.description || "Backend service repository and architecture implementation."}
             </p>
 
             <!-- Topic Badges -->
@@ -339,7 +332,7 @@
                 rel="noopener noreferrer"
                 class="neo-btn inline-flex items-center justify-center gap-1.5 bg-[#FFE600] text-black font-mono font-black text-xs py-2 uppercase"
               >
-                <span>OPEN REPO</span>
+                <span>VIEW REPO</span>
                 <ExternalLink class="w-3.5 h-3.5" />
               </a>
 
@@ -350,10 +343,10 @@
               >
                 {#if copiedId === repo.id}
                   <Check class="w-3.5 h-3.5 text-[#54E346]" />
-                  <span class="text-[#54E346]">COPIED!</span>
+                  <span class="text-[#54E346]">COPIED</span>
                 {:else}
                   <Copy class="w-3.5 h-3.5" />
-                  <span>GIT CLONE</span>
+                  <span>CLONE</span>
                 {/if}
               </button>
             </div>
@@ -366,18 +359,15 @@
   {:else}
     <!-- Empty State -->
     <div class="bg-white dark:bg-[#151624] border-4 border-black dark:border-white shadow-[8px_8px_0_#000] dark:shadow-[8px_8px_0_#FFE600] p-12 text-center space-y-4 mb-10">
-      <div class="w-16 h-16 bg-[#FF5E97] text-black border-3 border-black mx-auto flex items-center justify-center shadow-[4px_4px_0_#000]">
-        <Terminal class="w-8 h-8" />
-      </div>
-      <h3 class="text-2xl font-black uppercase text-black dark:text-white">NO MATCHING REPOSITORIES FOUND</h3>
+      <h3 class="text-2xl font-black uppercase text-black dark:text-white">NO REPOSITORIES FOUND</h3>
       <p class="text-zinc-600 dark:text-zinc-300 font-mono text-sm max-w-md mx-auto">
-        No projects matched the search criteria "{searchQuery}" with filter "{selectedLanguage}".
+        No projects match the current search query and filter criteria.
       </p>
       <button 
         onclick={() => { searchQuery = ''; selectedLanguage = 'ALL'; }}
         class="neo-btn inline-block bg-[#FFE600] text-black font-black font-mono text-xs uppercase px-5 py-2.5 cursor-pointer"
       >
-        RESET ALL FILTERS
+        RESET FILTERS
       </button>
     </div>
   {/if}
@@ -393,7 +383,7 @@
         class="neo-btn px-4 py-2 bg-white dark:bg-[#1C1D2E] text-black dark:text-white text-xs uppercase flex items-center gap-1.5 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
       >
         <ChevronLeft class="w-4 h-4 stroke-[3]" />
-        <span>PREV PAGE</span>
+        <span>PREVIOUS</span>
       </button>
 
       <!-- Numeric Page Buttons -->
@@ -414,7 +404,7 @@
         disabled={currentPage === totalPages}
         class="neo-btn px-4 py-2 bg-[#FFE600] text-black text-xs uppercase flex items-center gap-1.5 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
       >
-        <span>NEXT PAGE</span>
+        <span>NEXT</span>
         <ChevronRight class="w-4 h-4 stroke-[3]" />
       </button>
 

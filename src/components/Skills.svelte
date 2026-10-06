@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { SkillCategory } from '../types/portfolio';
-  import { Code2, Server, Database, Container, Network, ShieldCheck } from 'lucide-svelte';
+  import { Code2, Server, Database, Container, Network, Check } from 'lucide-svelte';
 
   let { skillCategories }: { skillCategories: SkillCategory[] } = $props();
 
@@ -18,14 +18,14 @@
   <!-- Section Title -->
   <div class="mb-10 space-y-2">
     <div class="inline-block bg-[#00F0FF] text-black font-mono font-bold text-xs uppercase px-3 py-1 border-2 border-black shadow-[2px_2px_0_#000]">
-      // 02. CORE COMPETENCIES
+      TECHNICAL SKILLS
     </div>
     <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-black dark:text-white flex items-center gap-3">
-      <span>TECH MATRIX & STACK</span>
-      <span class="text-[#FFE600] text-2xl sm:text-4xl">⚡</span>
+      <span>AREAS OF EXPERTISE</span>
+      <span class="text-[#FFE600] text-2xl sm:text-4xl">★</span>
     </h2>
     <p class="text-zinc-600 dark:text-zinc-300 font-medium max-w-2xl text-sm sm:text-base">
-      High-throughput backend engineering, scalable data persistence, enterprise connectors, and deep production observability.
+      Comprehensive set of technologies and tools applied throughout 4+ years of building backend systems, integrations, and infrastructure.
     </p>
   </div>
 
@@ -38,7 +38,7 @@
       <div class="bg-white dark:bg-[#151624] border-3 border-black dark:border-white shadow-[6px_6px_0_#000] dark:shadow-[6px_6px_0_#FFE600] flex flex-col justify-between group hover:-translate-y-1 transition-transform">
         
         <div>
-          <!-- Header Bar with Distinct Neo-brutalist Pop Color -->
+          <!-- Header Bar -->
           <div class="{visual.bg} {visual.color} p-4 border-b-3 border-black dark:border-white flex items-center justify-between font-mono font-black">
             <div class="flex items-center gap-2.5">
               <Icon class="w-5 h-5 stroke-[2.5]" />
@@ -60,31 +60,31 @@
           </div>
         </div>
 
-        <!-- Card Footer Technical Tag -->
-        <div class="px-5 py-2.5 bg-zinc-100 dark:bg-[#1C1D2E] border-t-2 border-black/10 dark:border-white/10 text-[11px] font-mono font-bold text-zinc-500 dark:text-zinc-400 flex items-center justify-between">
-          <span>DEPLOYED IN PRODUCTION</span>
-          <span class="text-[#54E346]">VERIFIED ✓</span>
+        <!-- Card Footer -->
+        <div class="px-5 py-2.5 bg-zinc-100 dark:bg-[#1C1D2E] border-t-2 border-black/10 dark:border-white/10 text-xs font-mono font-bold text-zinc-600 dark:text-zinc-400 flex items-center justify-between">
+          <span>{cat.skills.length} TECHNOLOGIES</span>
+          <span class="text-black dark:text-white font-bold">ACTIVE</span>
         </div>
 
       </div>
     {/each}
 
-    <!-- Extra Neobrutalist Stack Highlights Box -->
+    <!-- Professional Approach Card -->
     <div class="bg-[#FFE600] border-3 border-black dark:border-white shadow-[6px_6px_0_#000] dark:shadow-[6px_6px_0_#fff] p-6 flex flex-col justify-between text-black">
       <div class="space-y-3">
         <div class="inline-block bg-black text-[#FFE600] font-mono font-black text-xs px-2.5 py-1 uppercase">
-          // ARCHITECTURE PILLARS
+          ENGINEERING PRINCIPLES
         </div>
         <h4 class="text-2xl font-black uppercase leading-tight">
-          RELIABILITY, SPEED & OBSERVABILITY
+          SCALABILITY & MAINTAINABILITY
         </h4>
         <p class="text-xs sm:text-sm font-medium leading-relaxed">
-          Zero-guesswork telemetry: Every endpoint traced with Loki, monitored via Prometheus alerts, and deployed container-first for high-stress resilience.
+          Committed to clean code architectures, reliable error handling, observable systems, and automated test & deployment workflows.
         </p>
       </div>
 
       <div class="pt-4 border-t-2 border-black flex items-center justify-between font-mono font-bold text-xs">
-        <span>SLA STANDARD: 99.9%</span>
+        <span>BEST PRACTICES FIRST</span>
         <span class="bg-black text-white px-2 py-0.5">READY</span>
       </div>
     </div>

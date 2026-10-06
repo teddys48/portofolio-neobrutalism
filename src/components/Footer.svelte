@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PersonalInfo } from '../types/portfolio';
-  import { ArrowUp, Terminal, Heart } from 'lucide-svelte';
+  import { ArrowUp } from 'lucide-svelte';
 
   let { personalInfo }: { personalInfo: PersonalInfo } = $props();
 
@@ -14,7 +14,7 @@
     
     <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-8 border-b-2 border-zinc-800">
       
-      <!-- Brand & Mission -->
+      <!-- Brand & Title -->
       <div class="space-y-2">
         <div class="flex items-center gap-2">
           <div class="bg-[#FFE600] text-black font-mono font-black text-lg px-2.5 py-1 border-2 border-white shadow-[2px_2px_0_#fff]">
@@ -25,11 +25,11 @@
           </span>
         </div>
         <p class="text-zinc-400 font-mono text-xs max-w-md">
-          Designing scalable services, resilient enterprise integrations, and high-performance APIs with Go, Node.js, and Docker.
+          Designing scalable backend services, enterprise integrations, and high-performance APIs.
         </p>
       </div>
 
-      <!-- Quick Back to Top Neobrutalist Button -->
+      <!-- Back to Top Button -->
       <button 
         onclick={scrollToTop}
         class="neo-btn bg-[#00F0FF] text-black font-mono font-black text-xs px-4 py-2.5 uppercase flex items-center gap-2 border-2 border-white shadow-[3px_3px_0_#fff] cursor-pointer"
@@ -40,19 +40,16 @@
 
     </div>
 
-    <!-- Tech Stack Blueprint & Copyright -->
+    <!-- Copyright -->
     <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 font-mono text-xs text-zinc-400">
       <div class="flex flex-wrap items-center gap-3">
-        <span class="text-zinc-500">ENGINEERING SPEC:</span>
-        <span class="text-[#FFE600] font-bold">BUN 1.3</span>
+        <span>Jakarta, Indonesia</span>
         <span>•</span>
-        <span class="text-[#FF5E97] font-bold">SVELTE 5</span>
+        <a href="mailto:{personalInfo.email}" class="hover:text-white transition-colors">{personalInfo.email}</a>
         <span>•</span>
-        <span class="text-[#00F0FF] font-bold">VITE</span>
+        <a href={personalInfo.linkedinUrl} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
         <span>•</span>
-        <span class="text-[#54E346] font-bold">TAILWIND CSS</span>
-        <span>•</span>
-        <span class="text-white font-bold">EXTREME NEOBRUTALISM</span>
+        <a href={personalInfo.githubUrl} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">GitHub</a>
       </div>
 
       <div class="text-zinc-500 text-[11px]">

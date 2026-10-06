@@ -1,5 +1,5 @@
 # ⚡ TEDDY SETIAWAN — BACKEND ENGINEER PORTFOLIO
-### Extreme Neobrutalism Web Application built with Bun, Svelte 5, Vite, TypeScript & Tailwind CSS
+### Production-Ready Extreme Neobrutalism Portfolio built with Bun, Svelte 5, Vite, TypeScript & Tailwind CSS
 
 [![Bun](https://img.shields.io/badge/Bun-1.3-FBF0DF?style=for-the-badge&logo=bun&logoColor=black)](https://bun.sh)
 [![Svelte](https://img.shields.io/badge/Svelte-5-FF3E00?style=for-the-badge&logo=svelte&logoColor=white)](https://svelte.dev)
@@ -12,9 +12,8 @@
 
 ## 🎨 Design Philosophy: Extreme Neobrutalism
 
-This portfolio is crafted with **Extreme Neobrutalism** aesthetic guidelines:
-- **High Contrast & Hard Borders**: 3px - 4px solid black outlines with high definition.
-- **Offset Drop Shadows**: Unblurred hard geometry shadows (`4px 4px 0 #000`, `6px 6px 0 #000`, `8px 8px 0 #000`).
+- **High Contrast & Hard Borders**: 3px - 4px solid black outlines with crisp definition.
+- **Offset Drop Shadows**: Unblurred geometry shadows (`4px 4px 0 #000`, `6px 6px 0 #000`, `8px 8px 0 #000`).
 - **High-Saturation Pop Colors**:
   - Canary Electric Yellow: `#FFE600`
   - Punch Pink: `#FF5E97`
@@ -23,35 +22,31 @@ This portfolio is crafted with **Extreme Neobrutalism** aesthetic guidelines:
   - Bold Orange: `#FF8A00`
 - **Tactile Click Feedback**: Micro-interactions with physical button depressions on `:hover` and `:active`.
 - **Light & Dark Mode**:
-  - **Default Light Mode**: Warm vintage off-white (`#FFFDF0`), pitch-black borders and shadows.
-  - **Extreme Dark Mode**: Charcoal black background (`#0C0D15`), crisp white borders, and electric yellow/cyan neobrutalist offset glow shadows.
+  - **Default Light Mode**: Warm off-white (`#FFFDF0`), pitch-black borders and hard drop shadows.
+  - **Extreme Dark Mode**: Charcoal black background (`#0C0D15`), crisp white borders, and electric yellow/cyan neobrutalist shadows.
 
 ---
 
 ## 🚀 Key Features
 
-1. **GitHub Projects by Page ("Project by Page GitHub")**:
-   - Live synchronization with public GitHub API (`https://api.github.com/users/teddys48/repos`).
-   - Resilient offline / rate-limit fallback data reflecting Teddy's actual repositories.
+1. **GitHub Projects by Page**:
+   - Synchronization with GitHub API (`https://api.github.com/users/teddys48/repos`).
+   - Resilient offline fallback data reflecting Teddy's actual repositories.
    - Interactive pagination (`Page 1, 2, 3...`, Next, Prev, and adjustable Page Size: 6 / 9 / 12 items).
    - Real-time search query filtering (by repo name, description, and topics).
    - Language filtering tabs (All, Go, TypeScript/JS, PHP, Rust).
    - One-click `git clone` command copying with animated confirmation.
-2. **Interactive Backend System Monitor**:
-   - Real-time uptime timer.
-   - Core engine telemetry (Go Fiber, Prometheus metrics, Loki stream, SAP RFC Connector).
-   - Live simulated structured JSON/text log feed.
-3. **Work History Dossier**:
+2. **Professional Experience**:
    - Detailed timeline for PT Nutech Integrasi (Go, Fiber, Node.js, SAP, Grafana, Loki, etc.).
-   - Key deliverables and technologies deployed badges.
-4. **Skills & Capabilities Matrix**:
-   - Categorized across Languages, Backend Development, Databases, DevOps & Infrastructure, and Enterprise Systems.
-5. **Credentials Bento**:
+   - Key responsibilities, achievements, and tech stack badges.
+3. **Skills & Expertise**:
+   - Categorized across Programming Languages, Backend Development, Databases, DevOps & Infrastructure, and Enterprise Systems.
+4. **Education & Certifications**:
    - Education: Universitas Pakuan (D3 Informatics Management, GPA 3.69).
    - Certifications: BNSP Junior Web Developer (2021) and Google Cybersecurity Specialization (Coursera 2024).
-6. **Communications & Inquiry Dispatcher**:
-   - Interactive mailto composer, direct email & phone copy actions, WhatsApp direct chat link.
-7. **Production Best Practices & SEO**:
+5. **Contact & Inquiry**:
+   - Direct message composer, one-click email and phone copying, and WhatsApp shortcut.
+6. **SEO & Accessibility**:
    - Semantic HTML5 structure.
    - Complete Open Graph & Twitter Card meta headers.
    - JSON-LD Structured Data (`Person` schema with job title, links, and expertise).
@@ -66,7 +61,6 @@ This portfolio is crafted with **Extreme Neobrutalism** aesthetic guidelines:
 - **Frontend Framework**: [Svelte 5](https://svelte.dev) (Runes `$state`, `$derived`, `$props`, `$effect`)
 - **Bundler & Tooling**: [Vite 8](https://vitejs.dev)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com) + `@tailwindcss/vite`
-- **Icons**: Lucide Svelte + Custom SVG Brand Badges
 - **Containerization**: Multi-stage Dockerfile with Nginx Alpine
 
 ---
@@ -85,7 +79,6 @@ bun install
 ```bash
 bun run dev
 ```
-Open `http://localhost:5173` in your browser.
 
 ### 3. Type Checking
 ```bash
@@ -117,8 +110,6 @@ docker build -t teddy-portfolio:latest .
 ```bash
 docker run -d -p 8080:80 --name teddy-portfolio teddy-portfolio:latest
 ```
-
-Open `http://localhost:8080` in your browser.
 
 ---
 

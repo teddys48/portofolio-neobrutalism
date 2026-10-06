@@ -14,7 +14,7 @@
       
       <div class="space-y-2">
         <div class="inline-block bg-[#FF8A00] text-black font-mono font-bold text-xs uppercase px-3 py-1 border-2 border-black shadow-[2px_2px_0_#000]">
-          // 04. ACADEMICS
+          ACADEMIC BACKGROUND
         </div>
         <h2 class="text-3xl sm:text-4xl font-black uppercase tracking-tight text-black dark:text-white flex items-center gap-2.5">
           <span>EDUCATION</span>
@@ -39,14 +39,14 @@
             </div>
             
             <div class="bg-[#54E346] text-black border-2 border-black px-3 py-1.5 font-mono text-center shadow-[3px_3px_0_#000]">
-              <div class="text-[10px] font-bold uppercase">CUMULATIVE GPA</div>
+              <div class="text-[10px] font-bold uppercase">GPA</div>
               <div class="text-lg font-black">{edu.gpa} / 4.00</div>
             </div>
           </div>
 
           <div class="space-y-2 pt-1">
             <div class="font-mono text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase">
-              CONCENTRATION AREAS:
+              FOCUS AREAS:
             </div>
             {#each edu.details as detail}
               <div class="p-3 bg-[#FFFDF0] dark:bg-[#1E1F30] border-2 border-black dark:border-zinc-700 font-medium text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
@@ -66,7 +66,7 @@
       
       <div class="space-y-2">
         <div class="inline-block bg-[#FF5E97] text-black font-mono font-bold text-xs uppercase px-3 py-1 border-2 border-black shadow-[2px_2px_0_#000]">
-          // 05. LICENSES
+          PROFESSIONAL LICENSES
         </div>
         <h2 class="text-3xl sm:text-4xl font-black uppercase tracking-tight text-black dark:text-white flex items-center gap-2.5">
           <span>CERTIFICATIONS</span>

@@ -8,9 +8,7 @@
     MapPin, 
     Send, 
     Copy, 
-    Check, 
-    MessageSquare,
-    ExternalLink
+    Check
   } from 'lucide-svelte';
 
   let { personalInfo }: { personalInfo: PersonalInfo } = $props();
@@ -34,7 +32,7 @@
 
   function handleSend(e: Event) {
     e.preventDefault();
-    const mailto = `mailto:${personalInfo.email}?subject=${encodeURIComponent(subject || 'Inquiry: Backend Engineering Role')}&body=${encodeURIComponent(message)}`;
+    const mailto = `mailto:${personalInfo.email}?subject=${encodeURIComponent(subject || 'Inquiry: Backend Engineering Opportunity')}&body=${encodeURIComponent(message)}`;
     window.location.href = mailto;
   }
 </script>
@@ -43,36 +41,36 @@
   
   <div class="mb-10 space-y-2">
     <div class="inline-block bg-[#FF5E97] text-black font-mono font-bold text-xs uppercase px-3 py-1 border-2 border-black shadow-[2px_2px_0_#000]">
-      // 06. COMMUNICATIONS
+      CONTACT
     </div>
     <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-black dark:text-white flex items-center gap-3">
-      <span>LET'S BUILD SOMETHING ROBUST</span>
-      <span class="text-[#FFE600] text-2xl sm:text-4xl">📬</span>
+      <span>GET IN TOUCH</span>
+      <span class="text-[#FFE600] text-2xl sm:text-4xl">★</span>
     </h2>
     <p class="text-zinc-600 dark:text-zinc-300 font-medium max-w-2xl text-sm sm:text-base">
-      Open for backend engineering positions, scalable API architectures, microservices consulting, and enterprise system integrations.
+      Open for backend engineering roles, system architecture discussions, and technical collaborations.
     </p>
   </div>
 
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
     
-    <!-- Left Column: Direct Info Dossier -->
+    <!-- Left Column: Direct Info -->
     <div class="lg:col-span-5 space-y-4">
       
       <!-- Contact Cards -->
       <div class="bg-white dark:bg-[#151624] border-4 border-black dark:border-white shadow-[8px_8px_0_#000] dark:shadow-[8px_8px_0_#FFE600] p-6 space-y-5">
         
         <div class="flex items-center gap-2 bg-[#FFE600] text-black font-mono font-bold text-xs px-3 py-1 border-2 border-black">
-          <span>CONTACT MATRIX // DIRECT CHANNELS</span>
+          <span>DIRECT CONTACT DETAILS</span>
         </div>
 
         <!-- Email Box -->
         <div class="p-4 bg-[#FFFDF0] dark:bg-[#1C1D2E] border-2 border-black dark:border-zinc-700 space-y-2">
           <div class="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 flex items-center justify-between">
-            <span class="flex items-center gap-1.5"><Mail class="w-4 h-4 text-[#FF5E97]" /> EMAIL ADDRESS</span>
+            <span class="flex items-center gap-1.5"><Mail class="w-4 h-4 text-[#FF5E97]" /> EMAIL</span>
             <button 
               onclick={copyEmail}
-              class="text-black dark:text-white hover:text-[#00F0FF] flex items-center gap-1 cursor-pointer"
+              class="text-black dark:text-white hover:text-[#00F0FF] flex items-center gap-1 cursor-pointer font-bold"
             >
               {#if emailCopied}
                 <Check class="w-3.5 h-3.5 text-[#54E346]" />
@@ -94,7 +92,7 @@
             <span class="flex items-center gap-1.5"><Phone class="w-4 h-4 text-[#54E346]" /> PHONE / WHATSAPP</span>
             <button 
               onclick={copyPhone}
-              class="text-black dark:text-white hover:text-[#00F0FF] flex items-center gap-1 cursor-pointer"
+              class="text-black dark:text-white hover:text-[#00F0FF] flex items-center gap-1 cursor-pointer font-bold"
             >
               {#if phoneCopied}
                 <Check class="w-3.5 h-3.5 text-[#54E346]" />
@@ -123,14 +121,14 @@
         <!-- Location Box -->
         <div class="p-4 bg-[#FFFDF0] dark:bg-[#1C1D2E] border-2 border-black dark:border-zinc-700 space-y-1">
           <div class="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 flex items-center gap-1.5">
-            <MapPin class="w-4 h-4 text-[#00F0FF]" /> LOCATION BASE
+            <MapPin class="w-4 h-4 text-[#00F0FF]" /> LOCATION
           </div>
           <div class="font-mono font-extrabold text-base text-black dark:text-white">
             {personalInfo.location}
           </div>
         </div>
 
-        <!-- Social Quick Link Buttons -->
+        <!-- Social Links -->
         <div class="grid grid-cols-2 gap-3 pt-2">
           <a 
             href={personalInfo.linkedinUrl}
@@ -157,7 +155,7 @@
 
     </div>
 
-    <!-- Right Column: Interactive Quick Message Dispatcher -->
+    <!-- Right Column: Message Form -->
     <div class="lg:col-span-7">
       <form 
         onsubmit={handleSend}
@@ -167,37 +165,37 @@
           <div class="flex items-center gap-2">
             <span class="w-3.5 h-3.5 bg-[#FF5E97] inline-block border border-black"></span>
             <h3 class="font-mono font-black text-base uppercase text-black dark:text-white">
-              DIRECT DISPATCH / INQUIRY
+              SEND A MESSAGE
             </h3>
           </div>
-          <span class="font-mono text-xs bg-[#54E346] text-black px-2 py-0.5 border border-black font-bold">
-            SMTP READY
+          <span class="font-mono text-xs bg-[#FFE600] text-black px-2 py-0.5 border border-black font-bold">
+            DIRECT
           </span>
         </div>
 
         <div class="space-y-4 font-mono text-xs">
           <div>
             <label for="contact-subject" class="block font-black uppercase text-zinc-700 dark:text-zinc-300 mb-1.5">
-              SUBJECT / PROJECT SCOPE:
+              SUBJECT:
             </label>
             <input 
               id="contact-subject"
               type="text" 
               bind:value={subject}
-              placeholder="e.g. Backend Engineer Opportunity / Go Microservices Project"
+              placeholder="e.g. Backend Engineering Opportunity / Project Discussion"
               class="w-full p-3 bg-[#FFFDF0] dark:bg-[#1C1D2E] text-black dark:text-white border-2 border-black dark:border-zinc-500 font-mono text-xs sm:text-sm focus:outline-none focus:bg-[#FFE600] focus:text-black dark:focus:bg-[#FFE600] dark:focus:text-black transition-colors"
             />
           </div>
 
           <div>
             <label for="contact-message" class="block font-black uppercase text-zinc-700 dark:text-zinc-300 mb-1.5">
-              MESSAGE CONTENT:
+              MESSAGE:
             </label>
             <textarea 
               id="contact-message"
               rows={5}
               bind:value={message}
-              placeholder="Hello Teddy, we'd like to discuss an opportunity involving Go, REST APIs, or system architecture..."
+              placeholder="Hello Teddy, we would like to get in touch regarding..."
               class="w-full p-3 bg-[#FFFDF0] dark:bg-[#1C1D2E] text-black dark:text-white border-2 border-black dark:border-zinc-500 font-mono text-xs sm:text-sm focus:outline-none focus:bg-[#FFE600] focus:text-black dark:focus:bg-[#FFE600] dark:focus:text-black transition-colors"
             ></textarea>
           </div>
@@ -209,10 +207,10 @@
             class="neo-btn w-full py-4 bg-[#FFE600] text-black font-black font-mono text-sm uppercase flex items-center justify-center gap-2 cursor-pointer shadow-[5px_5px_0_#000]"
           >
             <Send class="w-4 h-4 stroke-[3]" />
-            <span>DISPATCH EMAIL INQUIRY</span>
+            <span>SEND MESSAGE</span>
           </button>
           <p class="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 text-center mt-2">
-            Opens your default email client with recipient pre-filled to <code class="text-black dark:text-white font-bold">{personalInfo.email}</code>
+            Opens your email client to send directly to <code class="text-black dark:text-white font-bold">{personalInfo.email}</code>
           </p>
         </div>
 
